@@ -18,6 +18,13 @@ type PrintTexture = 'none' | 'holographic' | 'matte' | 'glossy';
 
 const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/14A4gz6B4gE31n8dG07bW01';
 
+const textureDescriptions: Record<string, string> = {
+  none: "Standard matte finish. Best for home printers. No glare, clean clean lines, high readability.",
+  glossy: "High-shine finish. Boosts color contrast and vibrancy. Simulates traditional photo paper.",
+  matte: "Textured grain finish. Simulates premium heavy cardstock with a tactile, expensive feel.",
+  holographic: "Iridescent foil overlay. Shifts colors in light. Best for digital sharing or foil printing."
+};
+
 const TicketDisplay: React.FC<TicketDisplayProps> = ({ 
   data, 
   imageUrl, 
@@ -302,7 +309,7 @@ const TicketDisplay: React.FC<TicketDisplayProps> = ({
                       <button
                         key={opt.id}
                         onClick={() => setPrintTexture(opt.id as PrintTexture)}
-                        className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all text-sm font-semibold ${
+                        className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all text-sm font-semibold group relative overflow-visible ${
                            printTexture === opt.id 
                            ? 'bg-[#C9A2FF]/10 border-[#C9A2FF] text-white shadow-[0_0_15px_rgba(201,162,255,0.15)]' 
                            : 'bg-[#1A1A35] border-transparent text-neutral-400 hover:bg-[#1F1F3F] hover:text-neutral-200'
@@ -311,11 +318,47 @@ const TicketDisplay: React.FC<TicketDisplayProps> = ({
                          <span className="flex items-center gap-3">
                             <i className={`fa-solid ${opt.icon} w-4 text-center ${printTexture === opt.id ? 'text-[#C9A2FF]' : 'text-neutral-600'}`}></i>
                             {opt.label}
+                            {/* Info Icon & Tooltip */}
+                            <div 
+                                className="ml-2 relative group/info"
+                                onClick={(e) => e.stopPropagation()} 
+                            >
+                                <i className="fa-regular fa-circle-question text-neutral-600 hover:text-[#5AA6FF] transition-colors cursor-help"></i>
+                                
+                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 bg-[#0F0F25] border border-white/20 rounded-lg shadow-2xl opacity-0 invisible group-hover/info:opacity-100 group-hover/info:visible transition-all duration-200 pointer-events-none z-50 text-left">
+                                    <p className="text-[10px] leading-relaxed text-neutral-300 font-normal normal-case tracking-normal">
+                                        {textureDescriptions[opt.id]}
+                                    </p>
+                                    {/* Arrow */}
+                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0F0F25] border-r border-b border-white/20 transform rotate-45"></div>
+                                </div>
+                            </div>
                          </span>
                          {printTexture === opt.id && <i className="fa-solid fa-check text-[#C9A2FF]"></i>}
                       </button>
                     ))}
                  </div>
+              </div>
+              
+              {/* Print Quality Info */}
+              <div>
+                   <h3 className="text-xs uppercase tracking-wider text-[#FF4FA3] font-bold mb-4 flex items-center gap-2">
+                      Print Specs
+                      <div className="group relative cursor-help">
+                          <i className="fa-regular fa-circle-question text-neutral-600 text-[10px] hover:text-[#5AA6FF] transition-colors"></i>
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#0F0F25] border border-white/10 rounded-lg text-[10px] text-neutral-400 hidden group-hover:block z-50 shadow-xl pointer-events-none">
+                             This design is generated at a high-resolution 300 DPI, ensuring crisp text and vibrant colors when printed on professional equipment.
+                             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0F0F25] border-r border-b border-white/10 transform rotate-45"></div>
+                          </div>
+                      </div>
+                   </h3>
+                   <div className="p-3 bg-[#1A1A35] rounded-xl border border-white/5 flex items-center justify-between">
+                       <span className="text-sm text-neutral-300 font-semibold flex items-center gap-2">
+                          <i className="fa-solid fa-maximize text-neutral-500 text-xs"></i>
+                          Resolution
+                       </span>
+                       <span className="text-xs text-[#5AA6FF] font-mono bg-[#5AA6FF]/10 px-2 py-1 rounded border border-[#5AA6FF]/20">300 DPI</span>
+                   </div>
               </div>
 
               {/* PAYMENT GATE / PRINT BUTTON */}
