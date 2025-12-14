@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ForeverTicket</title>
+    <title>PrettyTickets</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       /* Custom scrollbar for webkit */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #1a1a1a; 
+        background: #0F0F25; 
       }
       ::-webkit-scrollbar-thumb {
         background: #333; 
@@ -29,9 +29,9 @@
         background: linear-gradient(
           115deg,
           transparent 0%,
-          rgba(0, 255, 255, 0.3) 25%,
-          rgba(255, 0, 128, 0.3) 50%,
-          rgba(255, 255, 0, 0.3) 75%,
+          rgba(90, 166, 255, 0.3) 25%,
+          rgba(255, 79, 163, 0.3) 50%,
+          rgba(201, 162, 255, 0.3) 75%,
           transparent 100%
         );
         background-size: 200% 200%;
@@ -83,12 +83,14 @@
     "react/": "https://esm.sh/react@^19.2.1/",
     "react": "https://esm.sh/react@^19.2.1",
     "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
-    "react-dom": "https://esm.sh/react-dom@^19.2.1"
+    "react-dom": "https://esm.sh/react-dom@^19.2.1",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.3"
   }
 }
 </script>
 </head>
-  <body class="bg-neutral-950 text-white antialiased">
+  <body class="bg-[#0F0F25] text-white antialiased">
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
